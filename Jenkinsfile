@@ -12,20 +12,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                dir("${DEPLOY_DIR}") {
-                    echo "Removing Old Deployments"
-                    rm -rf *
-                    echo "Removed Old Deployments from path: ${PWD}"
-                    echo "Checking out the latest code from GitHub"
-                    checkout([$class: 'GitSCM',
-                        branches: [[name: '*/cicd-1']],
-                        userRemoteConfigs: [[
-                        url: 'https://github.com/your-username/fastapi-demo.git',
-                        credentialsId: 'github-token'
-                        ]]
-                    ])
-                    sh 'pwd'
-                }
+                script {
+                    dir("${DEPLOY_DIR}") {
+                        echo "Removing Old Deployments"
+                        sh 'rm -rf *'
+                        echo "Removed Old Deployments from path: ${env.PWD}"
+                        echo "Checking out the latest code from GitHub"
+                        checkout([$class: 'GitSCM',
+                            branches: [[name: '*/cicd-1']],
+                            userRemoteConfigs: [[
+                                url: 'https://github.com/your-username/fastapi-demo.git',
+                                credentialsId: 'github-token'
+                            ]]
+                        ])
+                        pwd
+                    }
             }
         }
 
