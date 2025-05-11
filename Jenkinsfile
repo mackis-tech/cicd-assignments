@@ -19,6 +19,7 @@ pipeline {
                         sh 'ls -la'
                         echo "Removed Old Deployments from path: ${PWD}"
                         echo "Checking out the latest code from GitHub"
+                        sh 'pwd'
                         checkout([$class: 'GitSCM',
                             branches: [[name: '*/cicd-1']],
                             userRemoteConfigs: [[
