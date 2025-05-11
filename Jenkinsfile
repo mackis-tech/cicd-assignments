@@ -77,7 +77,9 @@ pipeline {
                     . "$VENV_DIR/bin/activate"
                     cd "$DEPLOY_DIR"
                     pwd
-                    nohup uvicorn web-app:app --host 0.0.0.0 --port 8000 > uvicorn.log &
+                    uvicorn web-app:app --host 0.0.0.0 --port 8000 > uvicorn.log &
+                    ps -ef | grep web-app
+                    echo "FastAPI app started on port 8000"
                 '''
             }
         }
