@@ -14,7 +14,7 @@ pipeline {
             steps {
                 dir("${DEPLOY_DIR}") {
                     echo "🔄 Checking out the latest code..."
-                    git credentialsId: 'github-token', url: 'https://github.com/your-username/fastapi-demo.git'
+                    git credentialsId: 'github-token', url: 'https://github.com/your-username/fastapi-demo.git', branch: 'cicd-1'
                     sh 'pwd'
                 }
             }
