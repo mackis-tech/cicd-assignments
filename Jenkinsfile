@@ -16,7 +16,7 @@ pipeline {
                     echo "🔄 Checking out the latest code..."
                     sh 'pwd'
                     rm -rf *
-                    git credentialsId: 'github-token', url: 'https://github.com/your-username/fastapi-demo.git', branch: 'cicd-1'
+                    git credentialsId: 'github-token', url: 'https://github.com/your-username/fastapi-demo.git', branch: 'cicd-1',
                     sh 'pwd'
                 }
             }
