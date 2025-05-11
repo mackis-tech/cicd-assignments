@@ -26,7 +26,9 @@ pipeline {
                             ]]
                         ])
                         pwd
-                    }
+                    }   
+                    echo "Checked out the latest code from GitHub"
+                }
             }
         }
 
