@@ -24,7 +24,7 @@ pipeline {
                         checkout([$class: 'GitSCM',
                             branches: [[name: '*/cicd-1']],
                             userRemoteConfigs: [[
-                                url: 'https://github.com/your-username/fastapi-demo.git',
+                                url: 'https://github.com/mackis-tech/cicd-assignments.git',
                                 credentialsId: 'github-token'
                             ]]
                         ])
