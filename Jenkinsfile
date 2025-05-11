@@ -13,6 +13,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 dir("${DEPLOY_DIR}") {
+                    echo "Removing Old Deployments"
+                    rm -rf *
+                    echo "Removed Old Deployments from path: ${PWD}"
+                    echo "Checking out the latest code from GitHub"
                     checkout([$class: 'GitSCM',
                         branches: [[name: '*/cicd-1']],
                         userRemoteConfigs: [[
