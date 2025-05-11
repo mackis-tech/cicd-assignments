@@ -12,7 +12,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/fastapi-demo.git'
+                cd $DEPLOY_DIR
+                pwd
+                echo "🔄 Checking out the latest code..."
+                git credentialsId 'github-token', url: 'https://github.com/your-username/fastapi-demo.git'
             }
         }
 
