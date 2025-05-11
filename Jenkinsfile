@@ -16,6 +16,7 @@ pipeline {
                     dir("${DEPLOY_DIR}") {
                         echo "Removing Old Deployments"
                         sh 'rm -rf *'
+                        sh 'rm -rf .git'
                         sh 'ls -la'
                         echo "Removed Old Deployments from path: ${PWD}"
                         echo "Checking out the latest code from GitHub"
