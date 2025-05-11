@@ -16,7 +16,7 @@ pipeline {
                     dir("${DEPLOY_DIR}") {
                         echo "Removing Old Deployments"
                         sh 'rm -rf *'
-                        ls -la
+                        sh 'ls -la'
                         echo "Removed Old Deployments from path: ${PWD}"
                         echo "Checking out the latest code from GitHub"
                         checkout([$class: 'GitSCM',
@@ -26,7 +26,7 @@ pipeline {
                                 credentialsId: 'github-token'
                             ]]
                         ])
-                        pwd
+                        sh 'pwd'
                     }   
                     echo "Checked out the latest code from GitHub"
                 }
