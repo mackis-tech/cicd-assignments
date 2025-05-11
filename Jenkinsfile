@@ -76,7 +76,8 @@ pipeline {
                 sh '''
                     . "$VENV_DIR/bin/activate"
                     cd "$DEPLOY_DIR"
-                    nohup uvicorn web-app:app --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 &
+                    pwd
+                    nohup uvicorn web-app:app --host 0.0.0.0 --port 8000 > uvicorn.log
                 '''
             }
         }
