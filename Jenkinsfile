@@ -6,7 +6,7 @@ pipeline {
         VENV_NEW = "/mnt/g/tech/ubuntu-ansible/"
         VENV_NEW_NAME = "myansible"
         VENV_DIR_NEW = "${VENV_NEW}${VENV_NEW_NAME}"
-        DEPLOY_DIR = "/mnt/g/tech/git-projects/deploy-env/fastapi"
+        DEPLOY_DIR = "/home/jenkins/fastapi"
     }
 
     stages {
