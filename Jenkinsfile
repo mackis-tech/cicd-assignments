@@ -13,10 +13,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 dir("${DEPLOY_DIR}") {
-                    echo "🔄 Checking out the latest code..."
-                    sh 'pwd'
-                    rm -rf *
-                    git credentialsId: 'github-token', url: 'https://github.com/your-username/fastapi-demo.git', branch: 'cicd-1',
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: '*/cicd-1']],
+                        userRemoteConfigs: [[
+                        url: 'https://github.com/your-username/fastapi-demo.git',
+                        credentialsId: 'github-token'
+                        ]]
+                    ])
                     sh 'pwd'
                 }
             }
