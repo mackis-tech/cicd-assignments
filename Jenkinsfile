@@ -74,6 +74,7 @@ pipeline {
         stage('Start FastAPI App') {
             steps {
                 sh '''
+                    #!/bin/bash
                     . "$VENV_DIR/bin/activate"
                     cd "$DEPLOY_DIR"
                     pwd
@@ -81,7 +82,7 @@ pipeline {
                     ps -ef | grep web-app
                     echo "FastAPI app started on port 8000"
                     disown
-                '''
+                   '''
             }
         }
 
