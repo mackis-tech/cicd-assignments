@@ -9,3 +9,8 @@ def read_root():
 @app.get("/hello/{name}")
 def read_item(name: str):
     return {"message": f"Hello, {name}!"}
+
+
+@app.get("/place")
+def read_item(name: str):
+    return {"message": f"Hello, local!"}
