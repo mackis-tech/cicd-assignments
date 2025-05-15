@@ -79,9 +79,9 @@ pipeline {
                     cd "$DEPLOY_DIR"
                     pwd
 		    uvicorn web-app:app --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 &
+                    disown
                     ps -ef | grep web-app
                     echo "FastAPI app started on port 8000"
-                    disown
                    '''
             }
         }
