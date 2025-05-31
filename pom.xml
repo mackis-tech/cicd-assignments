@@ -10,6 +10,14 @@
     <name>Simple Java API</name>
     <description>Simple REST API using Spring Boot</description>
 
+<!-- ✅ Add the distributionManagement block right below here -->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/mackis-tech/cicd-assignments</url>
+        </repository>
+    </distributionManagement>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
