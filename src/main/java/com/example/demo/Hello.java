@@ -8,7 +8,7 @@ public class Hello {
 
     @GetMapping("/api/hello")
     public String hello() {
-        return "Hello, World, How are you!";
+        return "Hello, World, How are you! doing";
     }
 }
 // This is a simple Spring Boot application that defines a REST controller.
