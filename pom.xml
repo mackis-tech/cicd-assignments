@@ -6,7 +6,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>simple-java-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Simple Java API</name>
     <description>Simple REST API using Spring Boot</description>
 
