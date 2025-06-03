@@ -1,2 +1,4 @@
 test.*
 .token.txt
+__pycache__
+*.pyc
