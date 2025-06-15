@@ -1,0 +1,83 @@
+#!/mnt/g/tech/ubuntu-ansible/myansible/bin/ansible-playbook
+- name: Installing WebServer
+  hosts: tag_app
+  remote_user: ec2-user
+  become: 'yes'
+  become_user: root
+
+  vars:
+    remote_app_path: "/opt/test"
+    remote_venv_path: /opt/venv
+    local_app_path: /home/jenkins/fastapi
+    service_name : "fastapi_app"
+
+  tasks:
+    - name: Install required packages
+      yum:
+        name:
+          - python3
+          - python3-pip
+        state: present
+        update_cache: yes
+
+    - name: Create app directory
+      file:
+        path: "{{ remote_app_path }}"
+        state: directory
+        owner: ec2-user
+        group: ec2-user
+        mode: '0755'
+
+    - name: Copy FastAPI app to server
+      copy:
+        src: "{{ local_app_path }}/web_app.py"
+        dest: "{{ remote_app_path }}"
+        owner: ec2-user
+        group: ec2-user
+        mode: '0755'
+    
+    - name: Copy requirements for app to server
+      copy:
+        src: "{{ local_app_path }}/requirements.txt"
+        dest: "{{ remote_app_path }}"
+        owner: ec2-user
+        group: ec2-user
+        mode: '0755'
+
+
+    - name: Create virtual environment
+      command: python3 -m venv {{ remote_venv_path }}
+      args:
+        creates: "{{ remote_venv_path }}/bin/activate"
+
+    - name: Install dependencies
+      pip:
+        requirements: "{{ remote_app_path }}/requirements.txt"
+        virtualenv: "{{ remote_venv_path }}"
+        virtualenv_command: python3 -m venv
+
+    - name: Create systemd service for FastAPI app
+      copy:
+        dest: /etc/systemd/system/{{ service_name }}.service
+        content: |
+          [Unit]
+          Description=FastAPI App
+          After=network.target
+
+          [Service]
+          User=ubuntu
+          WorkingDirectory={{ remote_app_path }}
+          ExecStart={{ remote_venv_path }}/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+      notify: Restart FastAPI service
+
+  handlers:
+    - name: Restart FastAPI service
+      systemd:
+        name: "{{ service_name }}"
+        enabled: yes
+        daemon_reload: yes
+        state: restarted
